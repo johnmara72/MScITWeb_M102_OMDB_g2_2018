@@ -8,4 +8,4 @@ https://drive.google.com/open?id=1Kwa9A_NkYQgiu8-Gk0ZE7Ino-6mfvlOkJh04yJNkF7k
 https://drive.google.com/open?id=13SReDPgi8jC-qL6IVyMmgpQpwHvbVuZ4VP0T37Jft00
 
 Front End συστήματος
-http://www.teithe.gr
+http://195.251.240.251/ErgasiaOMDB/login.php

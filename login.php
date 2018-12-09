@@ -127,14 +127,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <br>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
                 <br>
-                <span class="help-block"><?php echo $username_err; ?></span>
+                <span><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Κωδικός</label>
                 <br>
                 <input type="password" name="password" class="form-control">
                 <br>
-                <span class="help-block"><?php echo $password_err; ?></span>
+                <span><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Είσοδος">

@@ -1,0 +1,109 @@
+.body {
+    padding: 5px;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 10px;
+    text-align: center;
+    background: #1a79bc;
+    color: white;
+    font-size: 10px;
+}
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: #1a944b;
+   color: white;
+   text-align: center;
+   padding: 5px;
+    font-size: 10px;
+}
+
+.logo {
+    border: 0px solid;
+    border-color: black;
+    opacity: 1;
+}
+
+img {
+    border: 2px solid;
+    border-color: black;
+    opacity: 0.5;
+}
+
+img:hover{
+    opacity: 1;
+}
+
+.button {
+    background-color: #666aaa;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 10px 2px 10px;
+    border-radius: 20%;
+    
+}
+
+.div {
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top:10px;
+    padding: 5px;
+}
+
+/*
+body {
+    font: 20px sans-serif;
+    margin: 0;
+}
+*/
+.wrapper { 
+    width: 350px; padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  --margin: 15px;
+  font: inherit;
+  color: inherit;
+}
+button {
+  overflow: visible;
+}
+button,
+select {
+  text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}

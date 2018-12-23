@@ -108,6 +108,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Είσοδος</title>
+    <link rel="stylesheet" href="format.css" >
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> -->
 
 </head>
 <body class="body">
@@ -134,7 +136,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <br>
                 <input type="password" name="password" class="form-control">
                 <br>
-                <span><?php echo $password_err; ?></span>
+                <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Είσοδος">

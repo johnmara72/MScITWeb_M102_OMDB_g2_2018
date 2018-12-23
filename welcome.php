@@ -13,7 +13,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <head>
     <meta charset="UTF-8">
     <title>Καλώς ήρθες!</title>
+    <link rel="stylesheet" href="format.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="omdbapi.js"></script>
 </head>
+    
 <body class="body">
     <div class="header">
         <img src="atei-logo.png" class="logo">
@@ -28,11 +32,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     
 
     
-    <div>
+    <div class="div">
         <form name='frm'  >
-            Movie Title: <input style='width:30%' name=title id='ttl' type=text required/>
+            Τίτλος Ταινίας: <input style='width:30%' name=title id='ttl' type=text required/>
             <br>
-            Year: <input style='width:5%' name=year id='yr' type=text/><br>
+            Έτος: <input style='width:5%' name=year id='yr' type=text/><br>
             <input style='width:30%' name="sub" onclick="omdbApi()" value="Αναζήτηση" type="button"/>
         </form>
     </div>
@@ -45,18 +49,18 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <!--    edo tha emfanizei to link tou API -->
     </p>
 
-    <div>    
-        <button onclick="showUser()">Η λίστα μου</button>        
+    <div style="margin:10px">    
+        <button class="button" onclick="showUser()" >Η λίστα μου</button>        
     </div> 
     
-    <div id="txtHint">
+    <div class="div" id="txtHint">
         <b>Λίστα προτιμήσεων</b>
     </div>
         
     <div style="margin:10px; padding:100px;">
         <p>
-            <a href="reset-password.php">Άλλαξε τον κωδικό σου</a>
-            <a href="logout.php">Έξοδος</a>
+            <a class="button" href="reset-password.php">Άλλαξε τον κωδικό σου</a>
+            <a class="button" href="logout.php">Έξοδος</a>
         </p>
     </div>
     <div class="footer">

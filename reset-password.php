@@ -1,24 +1,24 @@
 <?php
-// Initialize the session - αρχικοποίηση της συνεδρίας
+//αρχικοποίηση της συνεδρίας
 session_start();
  
-// Check if the user is logged in, otherwise redirect to login page - έλεγχος αν είναι συνδεδεμένος ο χρήστης αλλιώς προώθηση στη σελίδα σύνδεσης
+//έλεγχος αν είναι συνδεδεμένος ο χρήστης αλλιώς προώθηση στη σελίδα σύνδεσης
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
  
-// Include config file - συμπεριλήψη αρχείου σύνδεσης με βάση δεδομένων
+//συμπεριλήψη αρχείου σύνδεσης με βάση δεδομένων
 require_once "config.php";
  
-// Define variables and initialize with empty values - ορισμός μεταβλητών και αρχικοποίηση με κενές τιμές
+//ορισμός μεταβλητών και αρχικοποίηση με κενές τιμές
 $new_password = $confirm_password = "";
 $new_password_err = $confirm_password_err = "";
  
-// Processing form data when form is submitted - επεξεργασία δεδομένων φόρμας όταν αυτή υποβάλλεται 
+//επεξεργασία δεδομένων φόρμας όταν αυτή υποβάλλεται 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Validate new password, trim space chars, check length at least 6 chars - έλεγχος κρυφού κωδικού, αφαίρεση κενών χαρακτήρων, έλεγχος μεγέθους τουλάχιστον 6 χαρακτήρων
+    //έλεγχος κρυφού κωδικού, αφαίρεση κενών χαρακτήρων, έλεγχος μεγέθους τουλάχιστον 6 χαρακτήρων
     if(empty(trim($_POST["new_password"]))){
 //        $new_password_err = "Please enter the new password.";     
         $new_password_err = "Παρακαλώ εισάγετε το καινούργιο κρυφό κωδικό.";     
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $new_password = trim($_POST["new_password"]);
     }
     
-    // Validate confirm password - έλεγχος επιβεβαίωσης κρυφού κωδικού
+    //έλεγχος επιβεβαίωσης κρυφού κωδικού
     if(empty(trim($_POST["confirm_password"]))){
 //        $confirm_password_err = "Please confirm the password.";
         $confirm_password_err = "Παρακαλώ επιβεβαιώστε τον κρυφό κωδικό.";
@@ -41,32 +41,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
         
-    // Check input errors before updating the database - έλεγχος για λάθη εισαγωγής κωδικών πριν ενημερωθεί η βάση δεδομένων
+    //έλεγχος για λάθη εισαγωγής κωδικών πριν ενημερωθεί η βάση δεδομένων
     if(empty($new_password_err) && empty($confirm_password_err)){
-        // Prepare an update statement - προετοιμασία ερωτήματος ενημέρωσης
+        //προετοιμασία ερωτήματος ενημέρωσης
         $sql = "UPDATE users SET password = ? WHERE id = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters - σύνδεση μεταβλητών με το προετοιμασμένο ερώτημα 
+            //σύνδεση μεταβλητών με το προετοιμασμένο ερώτημα 
             mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
             
-            // Set parameters - hash password and store it - προετοιμασία παραμέτρων και hash κρυφού κωδικού και αποθήκευσή τους
+            //προετοιμασία παραμέτρων και hash κρυφού κωδικού και αποθήκευσή τους
             $param_password = password_hash($new_password, PASSWORD_DEFAULT);
             $param_id = $_SESSION["id"];
             
-            // Attempt to execute the prepared statement - προσπάθεια εκτέλεσης προετοιμασμένου ερωτήματος
+            //προσπάθεια εκτέλεσης προετοιμασμένου ερωτήματος
             if(mysqli_stmt_execute($stmt)){
-                // Password updated successfully. Destroy the session, and redirect to login page - Ολοκληρώθηκε η ενημέρωση του κρυφού κωδικού, καταστροφή συνεδρίας και προώθηση στη σελίδα σύνδεσης
+                //Ολοκληρώθηκε η ενημέρωση του κρυφού κωδικού, καταστροφή συνεδρίας και προώθηση στη σελίδα σύνδεσης
                 session_destroy();
                 header("location: login.php");
                 exit();
             } else{
-         //       echo "Oops! Something went wrong. Please try again later.";
                 echo "Δυστυχώς δεν ολοκληρώθηκε η αλλαγή. Παρακαλώ προσπαθήστε αργότερα.";
             }
         }
         
-        // Close statement - κλείσιμο ερωτήματος
+        //κλείσιμο ερωτήματος
         mysqli_stmt_close($stmt);
     }
     
@@ -81,6 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Reset Password - Αλλαγή κρυφού κωδικού</title>
+    <link rel="stylesheet" href="format.css" >
 </head>
     
 <body>
@@ -97,16 +97,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <p>Συμπληρώστε την φόρμα για αλλαγή του κωδικού σας.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post"> 
             <div class="form-group <?php echo (!empty($new_password_err)) ? 'has-error' : ''; ?>">
-                <label>Νέος Κωδικός:</label>
+                <label><strong>Νέος Κωδικός:</strong></label><br>
                 <input type="password" name="new_password" class="form-control" value="<?php echo $new_password; ?>">
             </div>
+            <br>
+            
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Επιβεβαίωση Κωδικού:</label>
+                <label><strong>Επιβεβαίωση Κωδικού:</strong></label><br>
                 <input type="password" name="confirm_password" class="form-control">
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <a class="btn btn-link" href="welcome.php">Cancel</a>
+                <input type="submit" class="button" value="Υποβολή">
+                <a class="button" href="welcome.php">Ακύρωση</a>
             </div>
         </form>
     </div>  

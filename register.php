@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Elegxo an edose username
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
+        $username_err = "Παρακαλώ εισάγετε όνομα χρήστη.";
     } else{
         // Elegxo an to username uparx3ei stin db
         $sql = "SELECT id FROM users WHERE username = ?";
@@ -28,7 +28,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
                 // elegxo an to username uparxei 
                 if(mysqli_stmt_num_rows($stmt) == 1){ 
-                    $username_err = "Το username υπάρχει ήδη.";
+                    $username_err = "Το όνομα χρήστη υπάρχει ήδη.";
                 }
                 // to userame den uparxei
                 else{
@@ -45,22 +45,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Elegxos password
     if(empty(trim($_POST["password"]))){
-        $password_err = "Παρακαλώ εισάγετε password.";     
+        $password_err = "Παρακαλώ εισάγετε κωδικό.";     
     } 
     // na exei toulaxiston 6 xaraktires
     elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "Το Password πρέπει να έχει τουλάχιστον 6 χαρακτήρες.";
+        $password_err = "Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες.";
     } else{
         $password = trim($_POST["password"]);
     }
     
     // Elegxos epivevaiosis password
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Παρακαλώ εισάγετε ξανά το password.";     
+        $confirm_password_err = "Παρακαλώ εισάγετε ξανά τον κωδικό.";     
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "Τα Password δεν ταιριάζουν.";
+            $confirm_password_err = "Οι κωδικοί δεν ταιριάζουν.";
         }
     }
     
@@ -100,8 +100,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Εγγραφή νέου χρήστη</title>
+    <link rel="stylesheet" href="format.css" >
 </head>
-<body>
+<body class="body">
     
     <div class="header">
         <img src="atei-logo.png" class="logo">
@@ -115,23 +116,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <p>Παρακαλώ συμπληρώστε την φόρμα για να δημιουργήσετε Λογαριασμό.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                <label>Username</label>
+                <label><strong>Όνομα χρήστη</strong></label><br>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span><?php echo $username_err; ?></span>
+                <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
+            <br>
+            
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                <label>Password</label>
+                <label><strong>Κωδικός</strong></label><br>
                 <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                <span><?php echo $password_err; ?></span>
+                <span class="help-block"><?php echo $password_err; ?></span>
             </div>
+            <br>
+            
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                <label>Confirm Password</label>
+                <label><strong>Επαναληψη Κωδικού</strong></label><br>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                <span><?php echo $confirm_password_err; ?></span>
+                <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
+                <input type="submit" class="btn btn-primary" value="Υποβολή">
+                <a class="button" href="login.php">Ακύρωση</a>
             </div>
             <p>Έχεις ήδη λογαριαμό; <a href="login.php">Κάνε Login εδώ</a>.</p>
         </form>

@@ -1,9 +1,11 @@
 .body {
     padding: 5px;
+    font: 14px sans-serif;
+    text-align: center;
 }
 
 .header {
-    position: fixed;
+    position: relative;
     width: 100%;
     left: 0;
     top: 0;
@@ -80,7 +82,7 @@ input,
 optgroup,
 select,
 textarea {
-  --margin: 15px;
+  margin: 15px;
   font: inherit;
   color: inherit;
 }

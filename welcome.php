@@ -30,7 +30,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <h1>Γειά σου <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Καλωσήρθες στην σελίδα μας.</h1>
     </div>
     
-
     
     <div class="div">
         <form name='frm'  >

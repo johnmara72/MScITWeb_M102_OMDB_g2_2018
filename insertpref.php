@@ -41,8 +41,8 @@ if (!$con) {
 }
 
 mysqli_select_db($con,"userMovies");
-$sql="insert into userMovies (id_user,id_movie) values  (".$_SESSION["id"].",'".$_POST["movie_id"]."');";
-       
+/* $sql="insert into userMovies (id_user,id_movie) values  (".$_SESSION["id"].",'".$_POST["movie_id"]."');"; */
+$sql="insert into userMovies (id_user,id_movie) values  (".$_SESSION["id"].",'".$_POST["movie_title"]."');";       
 $result = mysqli_query($con,$sql);
 
 mysqli_close($con);

@@ -41,13 +41,15 @@ function omdbApi() {
             }
             imageTag.width="170";
             imageTag.height="250";
-            imageTag.title=movie.Title;
-            imageTag.dataset.movieid=movie.imdbID;
+            //imageTag.title=movie.Title;
+            //imageTag.dataset.movieid=movie.imdbID;
+			imageTag.dataset.movie_title=movie.Title;
             imageTag.addEventListener('click',(event) =>{
                 var imageClicked = event.target;
                 $.post("insertpref.php",
                        {
-                        movie_id:imageClicked.dataset.movieid
+                        //movie_id:imageClicked.dataset.movieid
+						movie_title:imageClicked.dataset.movie_title
                         },
                 function(data, status){
                     if(status === 'success' )
@@ -70,30 +72,10 @@ function omdbApi() {
 }
 
 
-
-
-/*
-function check() {
-    var choice = document.getElementsByName("choose");
-    var k = choice.length;
-  
-    for(i=0; i<k; i++) {
-        if(choice[i].checked){
-            console.log(choice[i].value);
-            if (choice[i].value == "like") {
-                document.getElementById("poster").style.borderColor="#00b10f";
-            }
-            if (choice[i].value == "nah") {
-                document.getElementById("poster").style.borderColor="#b10000";
-            }
-            
-        }
-    }
-    
-}
-*/
-
 function showUser(str) {
+	
+    document.getElementById('txtHint').innerHTML = '';	
+	
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
